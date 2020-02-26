@@ -5,6 +5,7 @@ output/
 ._*
 .Spotlight-V100
 .Trashes
-TODO.txt
+.*
+TODO.md
 ehthumbs.db
 Thumbs.db

@@ -36,7 +36,7 @@ except:
     broke = True
 
 if path.isfile(outputFile):
-    print("Output file already exists. What would you like to do? Overwrite, Cancel or Unique?")
+    print("WARNING: Output file already exists. What would you like to do? Overwrite, Cancel or Unique?")
     answer = input("[O/C/U]: ")
     if answer == "O" or answer == "o":
         None

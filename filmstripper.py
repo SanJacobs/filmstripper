@@ -1,6 +1,8 @@
 from PIL import Image
 import glob
 import sys
+import random
+from os import path
 
 broke = False
 
@@ -32,6 +34,19 @@ try:
 except:
     print("ERROR: Output file argument invalid.")
     broke = True
+
+if path.isfile(outputFile):
+    print("Output file already exists. What would you like to do? Overwrite, Cancel or Unique?")
+    answer = input("[O/C/U]: ")
+    if answer == "O" or answer == "o":
+        None
+    elif answer == "C" or answer == "c":
+        broke = True
+    elif answer == "U" or answer == "u":
+        index = outputFile.find(".")
+        newName = outputFile[:index] + str(random.randint(1000, 9999)) + outputFile[index:]
+        print("New output filename: "+newName)
+        outputFile = newName
 
 brkck()
 

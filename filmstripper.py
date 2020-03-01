@@ -145,6 +145,8 @@ for eachFile in fileList:
     extendedStrip = filmstrip.crop(box=(0, 0, filmstrip.width+widthAdd, filmstrip.height+heightAdd))
     extendedStrip.paste(eachImage, (extendedStrip.width-width, extendedStrip.height-height))
     filmstrip = extendedStrip
+    print(eachFile+" added to filmstrip.")
 
-
+print("Exporting filmstrip to "+outputFile)
 filmstrip.save(outputFile)
+print("Filmstrip exported.")

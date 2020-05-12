@@ -49,10 +49,11 @@ if path.isfile(outputFile):
     elif answer == "C" or answer == "c":
         broke = True
     elif answer == "U" or answer == "u":
-        index = outputFile.find(".")
-        newName = outputFile[:index] + str(random.randint(1000, 9999)) + outputFile[index:]
-        print("New output filename: "+newName)
-        outputFile = newName
+        while path.isfile(outputFile):
+            index = outputFile.find(".")
+            newName = outputFile[:index] + str(random.randint(0, 9)) + outputFile[index:]
+            print("New output filename: "+newName)
+            outputFile = newName
 
 brkck()
 

@@ -19,23 +19,27 @@ def brkck(**args):
 
 
 # Reading the input arguments
-try:
-    print("Reading input folder...")
-    inputFolder = sys.argv[1]
-    print(inputFolder)
-except:
-    print("ERROR: Input folder argument invalid.")
-    broke = True
+if len(sys.argv) > 2:
+    try:
+        print("Reading input folder...")
+        inputFolder = sys.argv[1]
+        print(inputFolder)
+    except:
+        print("ERROR: Input folder argument invalid.")
+        broke = True
 
-brkck()
+    brkck()
 
-try:
-    print("Reading output filename...")
-    outputFile = sys.argv[2]
-    print(outputFile)
-except:
-    print("ERROR: Output file argument invalid.")
-    broke = True
+    try:
+        print("Reading output filename...")
+        outputFile = sys.argv[2]
+        print(outputFile)
+    except:
+        print("ERROR: Output file argument invalid.")
+        broke = True
+else:
+    inputFolder = "input/"
+    outputFile = "output/output.png"
 
 if path.isfile(outputFile):
     print("WARNING: Output file already exists. What would you like to do? Overwrite, Cancel or Unique?")

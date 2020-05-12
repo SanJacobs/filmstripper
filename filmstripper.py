@@ -8,6 +8,7 @@ from os import path
 
 broke = False
 
+
 def brkck(**args):
     forcer = None
     if args:
@@ -128,12 +129,13 @@ print("Width: "+str(filmstrip.width))
 print("Height: "+str(filmstrip.height))
 print("Colorspace: "+filmstrip.mode)
 
+
 # Adding each image to filmstrip
 
 for eachFile in fileList:
     print("Loading "+eachFile+"...")
     eachImage = Image.open(eachFile)
-    
+
     # Checking files for compatabililty
 
     if inputExtension not in eachFile:
@@ -148,7 +150,7 @@ for eachFile in fileList:
     if eachImage.mode != filmstrip.mode:
         print("ERROR: Image colorspace mismatch")
     brkck()
-    
+
     extendedStrip = filmstrip.crop(box=(0, 0, filmstrip.width+widthAdd, filmstrip.height+heightAdd))
     extendedStrip.paste(eachImage, (extendedStrip.width-width, extendedStrip.height-height))
     filmstrip = extendedStrip

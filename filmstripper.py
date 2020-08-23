@@ -43,18 +43,25 @@ else:
     outputFile = "output/output.png"
 
 if path.isfile(outputFile):
-    print("WARNING: Output file already exists. What would you like to do? Overwrite, Cancel or Unique?")
-    answer = input("[O/C/U]: ")
-    if answer == "O" or answer == "o":
-        None
-    elif answer == "C" or answer == "c":
-        broke = True
-    elif answer == "U" or answer == "u":
-        while path.isfile(outputFile):
-            index = outputFile.find(".")
-            newName = outputFile[:index] + str(random.randint(0, 9)) + outputFile[index:]
-            print("New output filename: "+newName)
-            outputFile = newName
+    name_conflict = True
+    while name_conflict:
+        print("WARNING: Output file already exists. What would you like to do? Overwrite, Cancel or Unique?")
+        answer = input("[O/C/U]: ")
+        if answer == "O" or answer == "o":
+            None
+            name_conflict = False
+        elif answer == "C" or answer == "c":
+            broke = True
+            name_conflict = False
+        elif answer == "U" or answer == "u":
+            while path.isfile(outputFile):
+                index = outputFile.find(".")
+                newName = outputFile[:index] + str(random.randint(0, 9)) + outputFile[index:]
+                print("New output filename: "+newName)
+                outputFile = newName
+            name_conflict = False
+        else:
+            print("Please write O, C or U.")
 
 brkck()
 

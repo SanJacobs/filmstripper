@@ -65,23 +65,23 @@ except:
 # Parsing the input arguments
 # And setting up basic variables
 
-fileList = glob.glob(str(input_folder+"*.*"))
-fileList.sort()
-firstFile = fileList[0]
-inputExtension = str(firstFile.partition(".")[1]+firstFile.partition(".")[2])
-firstFile.partition(".")[2]
+file_list = glob.glob(str(input_folder+"*.*"))
+file_list.sort()
+first_file = file_list[0]
+input_extension = str(first_file.partition(".")[1]+first_file.partition(".")[2])
+first_file.partition(".")[2]
 
-if inputExtension:
-    print("Input file extension found: "+inputExtension)
+if input_extension:
+    print("Input file extension found: "+input_extension)
 else:
     print("ERROR: Input file extension not found.")
     sys.exit()
 
-outputExtension = str(output_file.partition(".")[1]+output_file.partition(".")[2])
+output_extension = str(output_file.partition(".")[1]+output_file.partition(".")[2])
 
-if outputExtension:
-    print("Output file extension found: "+outputExtension)
-elif inputExtension == ".jpg":
+if output_extension:
+    print("Output file extension found: "+output_extension)
+elif input_extension == ".jpg":
     print("Output file extension not found, using input file type, .jpg")
 else:
     print("Output file extension not found, defaulting to .png")
@@ -89,29 +89,29 @@ else:
 
 # Setting up filmstrip buffer
 
-print("Loading first image... "+firstFile)
-firstImage = Image.open(firstFile)
-width = firstImage.width
-FSwidth = width
-height = firstImage.height
-FSheight = height
-colorspace = firstImage.mode
+print("Loading first image... "+first_file)
+first_image = Image.open(first_file)
+width = first_image.width
+fs_width = width
+height = first_image.height
+fs_height = height
+colorspace = first_image.mode
 print("Image attributes:")
 print("Width: "+str(width))
 print("Height: "+str(height))
 print("Colorspace: "+colorspace)
 
 if horizontal_rendering:
-    FSwidth = 0
-    widthAdd = width
-    heightAdd = 0
+    fs_width = 0
+    width_add = width
+    height_add = 0
 else:
-    FSheight = 0
-    heightAdd = height
-    widthAdd = 0
+    fs_height = 0
+    height_add = height
+    width_add = 0
 
 print("Creating filmstrip buffer...")
-filmstrip = Image.new(colorspace, (FSwidth, FSheight))
+filmstrip = Image.new(colorspace, (fs_width, fs_height))
 print("Width: "+str(filmstrip.width))
 print("Height: "+str(filmstrip.height))
 print("Colorspace: "+filmstrip.mode)
@@ -119,28 +119,28 @@ print("Colorspace: "+filmstrip.mode)
 
 # Adding each image to filmstrip
 
-for eachFile in fileList:
-    print("Loading "+eachFile+"...")
-    eachImage = Image.open(eachFile)
+for each_file in file_list:
+    print("Loading "+each_file+"...")
+    each_image = Image.open(each_file)
 
     # Checking files for compatabililty
 
-    if inputExtension not in eachFile:
+    if input_extension not in each_file:
         print("ERROR: Filetype mismatch.")
         sys.exit()
-    if horizontal_rendering and eachImage.height != FSheight:
+    if horizontal_rendering and each_image.height != fs_height:
         print("ERROR: Image height mismatch.")
         sys.exit()
-    if not horizontal_rendering and eachImage.width != FSwidth:
+    if not horizontal_rendering and each_image.width != fs_width:
         print("ERROR: Image width mismatch.")
         sys.exit()
-    if eachImage.mode != filmstrip.mode:
+    if each_image.mode != filmstrip.mode:
         print("ERROR: Image colorspace mismatch")
 
-    extendedStrip = filmstrip.crop(box=(0, 0, filmstrip.width+widthAdd, filmstrip.height+heightAdd))
-    extendedStrip.paste(eachImage, (extendedStrip.width-width, extendedStrip.height-height))
-    filmstrip = extendedStrip
-    print(eachFile+" added to filmstrip.")
+    extended_strip = filmstrip.crop(box=(0, 0, filmstrip.width+width_add, filmstrip.height+height_add))
+    extended_strip.paste(each_image, (extended_strip.width-width, extended_strip.height-height))
+    filmstrip = extended_strip
+    print(each_file+" added to filmstrip.")
 
 print("Exporting filmstrip to "+output_file)
 filmstrip.save(output_file)

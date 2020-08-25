@@ -23,8 +23,8 @@ def brkck(**args):
 if len(sys.argv) > 2:
     try:
         print("Reading input folder...")
-        inputFolder = sys.argv[1]
-        print(inputFolder)
+        input_folder = sys.argv[1]
+        print(input_folder)
     except:
         print("ERROR: Input folder argument invalid.")
         broke = True
@@ -39,7 +39,7 @@ if len(sys.argv) > 2:
         print("ERROR: Output file argument invalid.")
         broke = True
 else:
-    inputFolder = "input/"
+    input_folder = "input/"
     outputFile = "output/output.png"
 
 if path.isfile(outputFile):
@@ -68,22 +68,22 @@ brkck()
 try:
     if "v" in sys.argv[3] or "V" in sys.argv[3]:
         print("Using vertical layout")
-        horiz = False
+        horizontal_rendering = False
     elif "h" in sys.argv[3] or "H" in sys.argv[3]:
         print("Using horizontal layout")
-        horiz = True
+        horizontal_rendering = True
     else:
         print(str('ERROR: "'+sys.argv[3])+'"'+" is not a recognized layout. Use H or V.")
         broke = True
 except:
-    horiz = False
+    horizontal_rendering = False
 
 brkck()
 
 # Parsing the input arguments
 # And setting up basic variables
 
-fileList = glob.glob(str(inputFolder+"*.*"))
+fileList = glob.glob(str(input_folder+"*.*"))
 fileList.sort()
 firstFile = fileList[0]
 inputExtension = str(firstFile.partition(".")[1]+firstFile.partition(".")[2])
@@ -121,7 +121,7 @@ print("Width: "+str(width))
 print("Height: "+str(height))
 print("Colorspace: "+colorspace)
 
-if horiz:
+if horizontal_rendering:
     FSwidth = 0
     widthAdd = width
     heightAdd = 0
@@ -148,10 +148,10 @@ for eachFile in fileList:
     if inputExtension not in eachFile:
         print("ERROR: Filetype mismatch.")
         broke = True
-    if horiz and eachImage.height != FSheight:
+    if horizontal_rendering and eachImage.height != FSheight:
         print("ERROR: Image height mismatch.")
         broke = True
-    if not horiz and eachImage.width != FSwidth:
+    if not horizontal_rendering and eachImage.width != FSwidth:
         print("ERROR: Image width mismatch.")
         broke = True
     if eachImage.mode != filmstrip.mode:

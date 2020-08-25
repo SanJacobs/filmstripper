@@ -6,18 +6,6 @@ import sys
 import random
 from os import path
 
-broke = False
-
-
-def brkck(**args):
-    forcer = None
-    if args:
-        forcer = args[0]
-    if broke or forcer:
-        sys.exit()
-    else:
-        None
-
 
 # Reading the input arguments
 if len(sys.argv) > 2:
@@ -27,7 +15,7 @@ if len(sys.argv) > 2:
         print(input_folder)
     except:
         print("ERROR: Input folder argument invalid.")
-        broke = True
+        sys.exit()
 
     brkck()
 
@@ -37,7 +25,7 @@ if len(sys.argv) > 2:
         print(outputFile)
     except:
         print("ERROR: Output file argument invalid.")
-        broke = True
+        sys.exit()
 else:
     input_folder = "input/"
     outputFile = "output/output.png"
@@ -51,7 +39,7 @@ if path.isfile(outputFile):
             None
             name_conflict = False
         elif answer == "C" or answer == "c":
-            broke = True
+            sys.exit()
             name_conflict = False
         elif answer == "U" or answer == "u":
             while path.isfile(outputFile):
@@ -74,7 +62,7 @@ try:
         horizontal_rendering = True
     else:
         print(str('ERROR: "'+sys.argv[3])+'"'+" is not a recognized layout. Use H or V.")
-        broke = True
+        sys.exit()
 except:
     horizontal_rendering = False
 
@@ -93,7 +81,7 @@ if inputExtension:
     print("Input file extension found: "+inputExtension)
 else:
     print("ERROR: Input file extension not found.")
-    broke = True
+    sys.exit()
 
 brkck()
 
@@ -147,13 +135,13 @@ for eachFile in fileList:
 
     if inputExtension not in eachFile:
         print("ERROR: Filetype mismatch.")
-        broke = True
+        sys.exit()
     if horizontal_rendering and eachImage.height != FSheight:
         print("ERROR: Image height mismatch.")
-        broke = True
+        sys.exit()
     if not horizontal_rendering and eachImage.width != FSwidth:
         print("ERROR: Image width mismatch.")
-        broke = True
+        sys.exit()
     if eachImage.mode != filmstrip.mode:
         print("ERROR: Image colorspace mismatch")
     brkck()

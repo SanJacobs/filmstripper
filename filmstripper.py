@@ -17,20 +17,18 @@ if len(sys.argv) > 2:
         print("ERROR: Input folder argument invalid.")
         sys.exit()
 
-    brkck()
-
     try:
         print("Reading output filename...")
-        outputFile = sys.argv[2]
-        print(outputFile)
+        output_file = sys.argv[2]
+        print(output_file)
     except:
         print("ERROR: Output file argument invalid.")
         sys.exit()
 else:
     input_folder = "input/"
-    outputFile = "output/output.png"
+    output_file = "output/output.png"
 
-if path.isfile(outputFile):
+if path.isfile(output_file):
     name_conflict = True
     while name_conflict:
         print("WARNING: Output file already exists. What would you like to do? Overwrite, Cancel or Unique?")
@@ -42,16 +40,14 @@ if path.isfile(outputFile):
             sys.exit()
             name_conflict = False
         elif answer == "U" or answer == "u":
-            while path.isfile(outputFile):
-                index = outputFile.find(".")
-                newName = outputFile[:index] + str(random.randint(0, 9)) + outputFile[index:]
-                print("New output filename: "+newName)
-                outputFile = newName
+            while path.isfile(output_file):
+                index = output_file.find(".")
+                new_name = output_file[:index] + str(random.randint(0, 9)) + output_file[index:]
+                print("New output filename: "+new_name)
+                output_file = new_name
             name_conflict = False
         else:
             print("Please write O, C or U.")
-
-brkck()
 
 try:
     if "v" in sys.argv[3] or "V" in sys.argv[3]:
@@ -65,8 +61,6 @@ try:
         sys.exit()
 except:
     horizontal_rendering = False
-
-brkck()
 
 # Parsing the input arguments
 # And setting up basic variables
@@ -83,9 +77,7 @@ else:
     print("ERROR: Input file extension not found.")
     sys.exit()
 
-brkck()
-
-outputExtension = str(outputFile.partition(".")[1]+outputFile.partition(".")[2])
+outputExtension = str(output_file.partition(".")[1]+output_file.partition(".")[2])
 
 if outputExtension:
     print("Output file extension found: "+outputExtension)
@@ -144,13 +136,12 @@ for eachFile in fileList:
         sys.exit()
     if eachImage.mode != filmstrip.mode:
         print("ERROR: Image colorspace mismatch")
-    brkck()
 
     extendedStrip = filmstrip.crop(box=(0, 0, filmstrip.width+widthAdd, filmstrip.height+heightAdd))
     extendedStrip.paste(eachImage, (extendedStrip.width-width, extendedStrip.height-height))
     filmstrip = extendedStrip
     print(eachFile+" added to filmstrip.")
 
-print("Exporting filmstrip to "+outputFile)
-filmstrip.save(outputFile)
+print("Exporting filmstrip to "+output_file)
+filmstrip.save(output_file)
 print("Filmstrip exported.")

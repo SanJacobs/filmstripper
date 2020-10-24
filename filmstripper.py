@@ -28,6 +28,7 @@ else:
     input_folder = "input/"
     output_file = "output/output.png"
 
+# Solving any possible filename conflicts to avoid accidental overwrites
 if path.isfile(output_file):
     name_conflict = True
     while name_conflict:

@@ -12,10 +12,12 @@ python3 filmstripper.py /input/directory/ /output/file.png [v/h]
 ## Examples
 
 Starting out with a png image sequence like this in a folder:
+
 ![image](https://user-images.githubusercontent.com/21090839/110244138-ab721a80-7f5d-11eb-81a8-759f8e894ed6.png)
 
 
 Will generate one png like this:
+
 ![Slider_Large](https://user-images.githubusercontent.com/21090839/110244156-bd53bd80-7f5d-11eb-89ba-465416a838f4.png)
 
 This one was generated with the `h` argument, so it is horizontal, rather than vertical.

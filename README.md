@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/21090839/164055119-5ac4ab2a-addd-40a4-94a9-a378b41674c3.png" height="200px"/>
+<img src="https://user-images.githubusercontent.com/21090839/164055119-5ac4ab2a-addd-40a4-94a9-a378b41674c3.png">
 
 # Filmstripper
 A tool for fusing multiple images together into a single filmstrip.
